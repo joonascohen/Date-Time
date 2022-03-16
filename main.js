@@ -22,7 +22,8 @@ const weekdays = [
     'Sunday'
 
 ]
-const pEL = document.getElementById('p-el')
+const pEL = document.getElementById('p-el');
+const pTime = document.getElementById('time');
 const myDate = new Date();
 const formattedDate = formatDate(myDate);
 
@@ -33,8 +34,8 @@ function formatDate(myDate) {
         fullMonth: myDate.getMonth() + 1,
         year: myDate.getFullYear(),
         hour: (myDate.getHours() % 12) || 12,
-        minute: myDate.getMinutes(),
-        second: myDate.getSeconds(),
+        minute: myDate.getMinutes().toString().padStart(2, '0'),
+        second: myDate.getSeconds().toString().padStart(2, '0'),
         amOrPm: myDate.getHours() < 12 ? "AM" : "PM",
     }
     switch (date.fullDay) {
@@ -99,12 +100,15 @@ function formatDate(myDate) {
             break;
     }
     console.log(date);
-
+    document.getElementById('time').innerHTML = `${date.fullMonth}/${date.date}/${date.year}
+${date.hour}:${date.minute}:${date.second}${date.amOrPm}
+${date.fullDay}, ${date.month} ${date.date}`
 
     return `${date.fullMonth}/${date.date}/${date.year}
-${date.hour}:${date.minute}${date.amOrPm}
+${date.hour}:${date.minute}:${date.second}${date.amOrPm}
 ${date.fullDay}, ${date.month} ${date.date}
 `
 }
+// setInterval(formatDate(myDate), 1000);
 pEL.textContent = myDate;
-console.log(formattedDate)
+console.log(formattedDate);
