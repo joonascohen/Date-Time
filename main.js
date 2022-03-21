@@ -27,16 +27,17 @@ const pTime = document.getElementById('time');
 const myDate = new Date();
 const formattedDate = formatDate(myDate);
 
+
 function formatDate(myDate) {
     const date = {
-        date: myDate.getDate(),
+        fullDate: myDate.getDate(),
         fullDay: myDate.getDay(),
         fullMonth: myDate.getMonth() + 1,
         year: myDate.getFullYear(),
         hour: (myDate.getHours() % 12) || 12,
         minute: myDate.getMinutes().toString().padStart(2, '0'),
         second: myDate.getSeconds().toString().padStart(2, '0'),
-        amOrPm: myDate.getHours() < 12 ? "AM" : "PM",
+        amOrPm: myDate.getHours() < 12 ? "AM" : "PM"
     }
     switch (date.fullDay) {
         case 1:
@@ -99,16 +100,17 @@ function formatDate(myDate) {
             date.month = months[11];
             break;
     }
-    console.log(date);
-    document.getElementById('time').innerHTML = `${date.fullMonth}/${date.date}/${date.year}
-${date.hour}:${date.minute}:${date.second}${date.amOrPm}
-${date.fullDay}, ${date.month} ${date.date}`
 
-    return `${date.fullMonth}/${date.date}/${date.year}
+
+    document.getElementById('time').innerHTML = `${date.fullMonth}/${date.fullDate}/${date.year}
 ${date.hour}:${date.minute}:${date.second}${date.amOrPm}
-${date.fullDay}, ${date.month} ${date.date}
+${date.fullDay}, ${date.month} ${date.fullDate}`
+
+    return `${date.fullMonth}/${date.fullDate}/${date.year}
+${date.hour}:${date.minute}:${date.second}${date.amOrPm}
+${date.fullDay}, ${date.month} ${date.fullDate}
 `
 }
-// setInterval(formatDate(myDate), 1000);
-pEL.textContent = myDate;
+
+pEL.innerHTML = myDate;
 console.log(formattedDate);
